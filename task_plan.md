@@ -52,7 +52,23 @@ Build and deploy a lead-generating website for Dream Solutions Tennessee (Radon 
 **Me / Orca:**
 - All code, deploy, DNS, form backend, SEO scaffolding.
 
-## Open Questions
-- Logo/branding: none yet — placeholder or text wordmark?
-- Service list exactness (radon testing, mitigation, crawl space encapsulation — confirm the full offering).
-- Pricing: avoid publishing prices unless requested.
+## Progress Log
+- [x] Domain purchased + on Cloudflare (NS randall/veda).
+- [x] Email DNS: MX (5 ASPMX), SPF, DKIM, DMARC, verification TXT + CNAME — all live and verified.
+- [x] Repo init + initial commit.
+- [x] Build spec written (build-prompt.md) with giordanobetti.com editorial design language.
+- [~] Core site build — Codex running (background).
+- [~] Service-area content brief written (service-area-content.md) — ready for next Codex pass.
+- [~] GBP listing draft written (gbp-listing.md).
+- [ ] Service-area pages (8 cities) — next Codex pass.
+- [ ] Lead form backend — Resend wiring.
+- [ ] Deploy to Cloudflare Pages + DNS A/CNAME.
+- [ ] Google Workspace verification (waiting on Google lag) + create 2 users.
+- [ ] Google Business Profile (user action; content prepared).
+
+## Blockers (user-only)
+- Google Workspace: click Verify (laptop), create KCammock@ + PDonnelly@ users, billing.
+- Google Business Profile: submit (content ready in gbp-listing.md).
+- Resend: verify dreamsolutionstn.com (needs full-access key or Resend dashboard login).
+- Real phone number (dummy placeholder in use).
+
