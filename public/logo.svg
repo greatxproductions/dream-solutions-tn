@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 334" width="240" height="334">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 348" width="240" height="348">
   <defs>
     <linearGradient id="cyanglow" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#00E5FF"/>
@@ -8,17 +8,13 @@
       <stop offset="0" stop-color="#0F3D4A"/>
       <stop offset="1" stop-color="#0A1A20"/>
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
 
-  <!-- ocean waves -->
+  <!-- ocean waves (clearance from canvas edge) -->
   <g fill="none" stroke="url(#cyanglow)" stroke-width="3" stroke-linecap="round">
-    <path d="M 40 290 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.9"/>
-    <path d="M 46 304 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.62"/>
-    <path d="M 52 318 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.38"/>
+    <path d="M 40 294 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.9"/>
+    <path d="M 46 306 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.62"/>
+    <path d="M 52 318 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.38"/>
   </g>
 
   <!-- outer shield -->
@@ -29,15 +25,15 @@
   <path d="M 74 34 L 166 34 L 186 58 L 186 166 L 120 272 L 54 166 L 54 58 Z"
         fill="none" stroke="url(#cyanglow)" stroke-width="2" opacity="0.55"/>
 
-  <!-- DS monogram (smooth curved S) -->
-  <g fill="none" stroke="url(#cyanglow)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+  <!-- DS monogram -->
+  <g fill="none" stroke="url(#cyanglow)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
     <path d="M 70 76 V 144 M 70 76 H 94 A 34 34 0 0 1 94 144 H 70"/>
-    <path d="M 150 80 A 16 16 0 0 0 150 112 A 16 16 0 0 1 150 144"/>
+    <path d="M 154 80 A 16 16 0 0 0 154 112 A 16 16 0 0 1 154 144"/>
   </g>
 
-  <!-- Rn (radon) -->
+  <!-- Rn (radon) — R taller than n -->
   <g fill="none" stroke="url(#cyanglow)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 96 188 V 212 M 96 188 H 106 A 12 12 0 0 1 106 212 H 96 M 106 200 L 118 212"/>
-    <path d="M 130 188 V 212 M 130 188 A 7 7 0 0 1 144 188 V 212"/>
+    <path d="M 96 186 V 214 M 96 186 H 106 A 14 14 0 0 1 106 214 H 96 M 114 198 L 128 214"/>
+    <path d="M 132 196 V 214 M 132 196 A 6 6 0 0 1 144 196 V 214"/>
   </g>
 </svg>
