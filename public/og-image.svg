@@ -12,6 +12,10 @@
       <stop offset="0" stop-color="#0A1A20"/>
       <stop offset="1" stop-color="#0F3D4A"/>
     </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <g id="trefoil">
       <circle cx="0" cy="0" r="4.5" fill="url(#cyan)"/>
       <path id="blade" d="M0,-4.5 L6.5,-12 A14,14 0 0 0 -6.5,-12 Z" fill="url(#cyan)"/>
@@ -28,9 +32,13 @@
           fill="url(#shieldbg)" stroke="url(#cyan)" stroke-width="5" stroke-linejoin="round"/>
     <path d="M 74 34 L 166 34 L 186 58 L 186 166 L 120 272 L 54 166 L 54 58 Z"
           fill="none" stroke="url(#cyan)" stroke-width="2" opacity="0.55"/>
-    <g fill="none" stroke="url(#cyan)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke="url(#cyan)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
       <path d="M 70 76 V 144 M 70 76 H 94 A 34 34 0 0 1 94 144 H 70"/>
-      <path d="M 170 76 H 138 V 110 H 170 V 144 H 138"/>
+      <path d="M 150 80 A 16 16 0 0 0 150 112 A 16 16 0 0 1 150 144"/>
+    </g>
+    <g fill="none" stroke="url(#cyan)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 96 188 V 212 M 96 188 H 106 A 12 12 0 0 1 106 212 H 96 M 106 200 L 118 212"/>
+      <path d="M 130 188 V 212 M 130 188 A 7 7 0 0 1 144 188 V 212"/>
     </g>
     <g fill="none" stroke="url(#cyan)" stroke-width="3" stroke-linecap="round">
       <path d="M 40 290 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.9"/>
