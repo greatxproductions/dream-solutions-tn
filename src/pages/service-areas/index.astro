@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import CallToAction from '../../components/CallToAction.astro';
+const cities = [
+  { slug: 'nashville', city: 'Nashville' },
+  { slug: 'gallatin', city: 'Gallatin' },
+  { slug: 'hendersonville', city: 'Hendersonville' },
+  { slug: 'franklin', city: 'Franklin' },
+  { slug: 'murfreesboro', city: 'Murfreesboro' },
+  { slug: 'brentwood', city: 'Brentwood' },
+  { slug: 'lebanon', city: 'Lebanon' },
+  { slug: 'mt-juliet', city: 'Mount Juliet' },
+];
+---
+<Layout title="Radon Testing & Mitigation Service Areas in Middle Tennessee" description="Explore Dream Solutions Tennessee’s service areas for radon testing, mitigation, and crawl space encapsulation in Nashville and seven surrounding communities.">
+<Hero eyebrow="Close to home / Service areas" title="Nashville roots.<br /><em>Middle Tennessee reach.</em>" description="We serve Nashville and surrounding Middle Tennessee communities with professional radon testing, mitigation system installation, and crawl space encapsulation." />
+<section class="services-section area-section" aria-labelledby="cities-heading">
+  <div class="section-heading"><p class="eyebrow">01 / Communities we serve</p><h2 id="cities-heading">Care for homes.<br /><em>Across our community.</em></h2></div>
+  <div class="service-grid">
+    {cities.map(({ slug, city }) => (
+      <a class="service-card" href={`/service-areas/${slug}/`}>
+        <h3>{city}, TN</h3>
+        <p>Radon testing, mitigation, and crawl space encapsulation for {city} and surrounding communities.</p>
+        <span class="text-link">Explore services in {city} <span aria-hidden="true">↗</span></span>
+      </a>
+    ))}
+  </div>
+</section>
+<CallToAction />
+</Layout>

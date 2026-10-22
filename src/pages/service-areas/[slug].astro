@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import CallToAction from '../../components/CallToAction.astro';
+
+export function getStaticPaths() {
+  const cities = [
+  { slug: 'nashville', city: 'Nashville' },
+  { slug: 'gallatin', city: 'Gallatin' },
+  { slug: 'hendersonville', city: 'Hendersonville' },
+  { slug: 'franklin', city: 'Franklin' },
+  { slug: 'murfreesboro', city: 'Murfreesboro' },
+  { slug: 'brentwood', city: 'Brentwood' },
+  { slug: 'lebanon', city: 'Lebanon' },
+  { slug: 'mt-juliet', city: 'Mount Juliet' },
+  ];
+  return cities.map(({ slug, city }) => ({ params: { slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const title = `Radon Testing & Mitigation in ${city}, TN`;
+const description = `Professional radon testing, mitigation system installation, and crawl space encapsulation in ${city}, TN. Contact Dream Solutions Tennessee for a free estimate.`;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Dream Solutions Tennessee',
+  url: 'https://dreamsolutionstn.com',
+  areaServed: { '@type': 'City', name: `${city}, Tennessee` },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Home radon and crawl space services',
+    itemListElement: ['Radon Testing', 'Radon Mitigation', 'Crawl Space Encapsulation / Vapor Barrier'].map(name => ({
+      '@type': 'Offer', itemOffered: { '@type': 'Service', name, serviceType: name }
+    }))
+  }
+};
+---
+<Layout title={title} description={description}>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+<Hero eyebrow={`${city}, Tennessee / Service area`} title={title} description={`We serve ${city} and surrounding communities with professional radon testing, mitigation system installation, and crawl space encapsulation.`} />
+<section class="split-section area-section" aria-labelledby="testing-heading">
+  <div><p class="eyebrow">01 / Why testing matters</p><h2 id="testing-heading">Know your air.<br /><em>Start with a test.</em></h2></div>
+  <div class="prose">
+    <p>Radon is a naturally occurring, colorless, odorless, radioactive gas. According to the EPA, radon is the second leading cause of lung cancer overall and the leading cause among non-smokers.</p>
+    <p>The only way to know your home’s radon level is to test. Levels vary from home to home, even next door, so a nearby home’s result cannot tell you the level in your {city} home.</p>
+    <div class="stat"><strong>4.0 <small>pCi/L</small></strong><p>EPA action level. At or above this level, the EPA recommends mitigation.</p></div>
+    <a class="text-link" href="https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean">Read the EPA’s guidance ↗</a>
+  </div>
+</section>
+<section class="split-section" aria-labelledby="services-heading">
+  <div><p class="eyebrow">02 / Services offered</p><h2 id="services-heading">Home care.<br /><em>In {city}.</em></h2></div>
+  <div class="prose">
+    <p>From measuring radon to installing a mitigation system or a crawl space vapor barrier, we help homeowners in {city} take the next step.</p>
+    <ul>
+      <li><a href="/radon-testing">Radon Testing</a></li>
+      <li><a href="/radon-mitigation">Radon Mitigation</a></li>
+      <li><a href="/crawl-space-encapsulation">Crawl Space Encapsulation / Vapor Barrier</a></li>
+    </ul>
+    <a class="text-link" href="/service-areas/">View all service areas ↗</a>
+  </div>
+</section>
+<CallToAction />
+</Layout>
