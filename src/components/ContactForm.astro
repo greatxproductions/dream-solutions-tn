@@ -1,1 +1,37 @@
-<form method="POST" action="/api/contact"><div class="form-grid"><div><label for="name">Name <span>(required)</span></label><input id="name" name="name" autocomplete="name" required maxlength="120" /></div><div><label for="phone">Phone <span>(required)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" /></div><div><label for="email">Email <span>(required)</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254" /></div><div><label for="service">Service needed</label><select id="service" name="service" required><option value="" disabled selected>Select a service</option><option>Radon Testing</option><option>Radon Mitigation</option><option>Crawl Space Encapsulation</option><option>Other</option></select></div></div><label for="message">Tell us about your home</label><textarea id="message" name="message" rows="4" maxlength="5000"></textarea><p class="form-note" id="form-note">Online requests are not connected yet. Please call <a href="tel:+16155550123">(615) 555-0123</a> to discuss your project.</p><button class="button" type="submit" aria-describedby="form-note">Request an estimate <span aria-hidden="true">↗</span></button></form>
+<form class="reveal" method="POST" action="/api/contact"><div class="form-grid"><div><label for="name">Name <span>(required)</span></label><input id="name" name="name" autocomplete="name" required maxlength="120" /></div><div><label for="phone">Phone <span>(required)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" /></div><div><label for="email">Email <span>(required)</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254" /></div><div><label for="service">Service needed</label><select id="service" name="service" required><option value="" disabled selected>Select a service</option><option>Radon Testing</option><option>Radon Mitigation</option><option>Crawl Space Encapsulation</option><option>Other</option></select></div></div><label for="message">Tell us about your home</label><textarea id="message" name="message" rows="4" maxlength="5000"></textarea><p class="form-note" id="form-note">We'll get back to you within one business day. Prefer to talk? Call <a href="tel:+16155550123">(615) 555-0123</a>.</p><button class="button" type="submit" aria-describedby="form-note">Request an estimate <span aria-hidden="true">↗</span></button></form>
+<script>
+const form = document.querySelector('form[action="/api/contact"]');
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const note = document.getElementById('form-note');
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form).entries())),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        note.innerHTML = 'Thanks — we got your request and will be in touch within one business day.';
+        note.style.color = '#0e7c86';
+        form.reset();
+      } else {
+        note.innerHTML = (data.error || 'Something went wrong.') + ' Please call <a href="tel:+16155550123">(615) 555-0123</a>.';
+        note.style.color = '#e56b4f';
+      }
+    } catch {
+      note.innerHTML = 'Could not send. Please call <a href="tel:+16155550123">(615) 555-0123</a>.';
+      note.style.color = '#e56b4f';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
+  });
+}
+</script>
+

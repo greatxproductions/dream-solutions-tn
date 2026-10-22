@@ -1,4 +1,5 @@
 ---
 const { number, title, description, href } = Astro.props;
+const delay = String(parseInt(number, 10));
 ---
-<a class="service-card" href={href}><span class="eyebrow">{number} / Our services</span><h3>{title}</h3><p>{description}</p><span class="text-link">Explore service <span aria-hidden="true">↗</span></span></a>
+<a class="service-card reveal" data-delay={delay} href={href}><span class="eyebrow">{number} / Our services</span><h3>{title}</h3><p>{description}</p><span class="text-link">Explore service <span aria-hidden="true">↗</span></span></a>

@@ -1,8 +1,71 @@
 ---
 import '../styles/global.css';
+import '../styles/futuristic.css';
 import SeoHead from '../components/SeoHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 const { title, description } = Astro.props;
 ---
-<!doctype html><html lang="en"><head><SeoHead title={title} description={description} /><slot name="head" /></head><body id="top"><Header /><main id="main"><slot /></main><Footer /></body></html>
+<!doctype html><html lang="en"><head><SeoHead title={title} description={description} /><slot name="head" /></head><body id="top"><div class="bg-aurora" aria-hidden="true"><div class="aurora-c"></div></div><div class="bg-grid" aria-hidden="true"></div><Header /><main id="main"><slot /></main><Footer /><script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduce || !hasIO) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { ro.observe(el); });
+  }
+
+  // Animated counters
+  var counterEls = document.querySelectorAll('[data-count]');
+  if (reduce || !hasIO) {
+    counterEls.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+  } else {
+    var co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        co.unobserve(e.target);
+        var target = parseFloat(e.target.getAttribute('data-count'));
+        var dec = parseInt(e.target.getAttribute('data-decimals') || '0', 10);
+        var dur = 1400, t0 = performance.now();
+        function tick(now) {
+          var p = Math.min((now - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          e.target.textContent = (target * eased).toFixed(dec);
+          if (p < 1) requestAnimationFrame(tick);
+          else e.target.textContent = target.toFixed(dec);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach(function (el) { co.observe(el); });
+  }
+
+  // Cursor glow
+  if (!reduce && matchMedia('(pointer: fine)').matches) {
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
+    var x = -400, y = -400, tx = -400, ty = -400, raf = null;
+    window.addEventListener('pointermove', function (e) {
+      tx = e.clientX - 160; ty = e.clientY - 160;
+      if (!raf) {
+        raf = requestAnimationFrame(function () {
+          x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+          glow.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+          raf = null;
+        });
+      }
+    });
+  }
+})();
+</script></body></html>
