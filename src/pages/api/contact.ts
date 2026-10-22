@@ -11,7 +11,7 @@ const json = (body: unknown, status = 200) =>
 
 export const GET: APIRoute = () => json({ ok: true });
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   let data: Record<string, string> = {};
   const contentType = request.headers.get('content-type') || '';
   try {
@@ -38,10 +38,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return json({ ok: false, error: 'Please enter a valid email address.' }, 400);
   }
 
-  const env = (locals as any)?.runtime?.env ?? {};
-  const RESEND_API_KEY: string = env.RESEND_API_KEY || '';
-  const FROM: string = env.LEAD_FROM_EMAIL || 'Dream Solutions TN <leads@dreamsolutionstn.com>';
-  const TO: string[] = (env.LEAD_TO_EMAILS || '')
+  // Env vars live in the Workers runtime — locals.runtime.env was removed in Astro v6.
+  const { env } = await import('cloudflare:workers');
+  const e = env as any;
+  const RESEND_API_KEY: string = e.RESEND_API_KEY || '';
+  const FROM: string = e.LEAD_FROM_EMAIL || 'Dream Solutions TN <leads@dreamsolutionstn.com>';
+  const TO: string[] = (e.LEAD_TO_EMAILS || '')
     .split(',')
     .map((s: string) => s.trim())
     .filter(Boolean);

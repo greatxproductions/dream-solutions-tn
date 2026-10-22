@@ -61,7 +61,6 @@ Build and deploy a lead-generating website for Dream Solutions Tennessee (Radon 
 - [~] Service-area content brief written (service-area-content.md) — ready for next Codex pass.
 - [~] GBP listing draft written (gbp-listing.md).
 - [ ] Service-area pages (8 cities) — next Codex pass.
-- [ ] Lead form backend — Resend wiring.
 - [ ] Deploy to Cloudflare Pages + DNS A/CNAME.
 - [ ] Google Workspace verification (waiting on Google lag) + create 2 users.
 - [ ] Google Business Profile (user action; content prepared).
