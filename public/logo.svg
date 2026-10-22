@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 334" width="240" height="334">
+  <defs>
+    <linearGradient id="cyanglow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E5FF"/>
+      <stop offset="1" stop-color="#2BE6D7"/>
+    </linearGradient>
+    <linearGradient id="shieldbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F3D4A"/>
+      <stop offset="1" stop-color="#0A1A20"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ocean waves -->
+  <g fill="none" stroke="url(#cyanglow)" stroke-width="3" stroke-linecap="round">
+    <path d="M 40 290 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.9"/>
+    <path d="M 46 304 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.62"/>
+    <path d="M 52 318 q 20 -13 40 0 q 20 13 40 0 q 20 -13 40 0 q 20 13 40 0" opacity="0.38"/>
+  </g>
+
+  <!-- outer shield -->
+  <path d="M 60 20 L 180 20 L 200 44 L 200 180 L 120 286 L 40 180 L 40 44 Z"
+        fill="url(#shieldbg)" stroke="url(#cyanglow)" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- inner shield outline -->
+  <path d="M 74 34 L 166 34 L 186 58 L 186 166 L 120 272 L 54 166 L 54 58 Z"
+        fill="none" stroke="url(#cyanglow)" stroke-width="2" opacity="0.55"/>
+
+  <!-- DS monogram -->
+  <g fill="none" stroke="url(#cyanglow)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 70 76 V 144 M 70 76 H 94 A 34 34 0 0 1 94 144 H 70"/>
+    <path d="M 170 76 H 138 V 110 H 170 V 144 H 138"/>
+  </g>
+</svg>
