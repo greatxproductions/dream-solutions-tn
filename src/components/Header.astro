@@ -3,4 +3,4 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = [['/radon-testing','Testing'],['/radon-mitigation','Mitigation'],['/crawl-space-encapsulation','Crawl spaces'],['/about','About']];
 ---
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="wordmark" href="/" aria-label="Dream Solutions Tennessee home"><img class="wordmark-mark" src="/logo.svg" alt="" width="28" height="28" aria-hidden="true" />Dream Solutions<span>Tennessee</span></a><nav aria-label="Main navigation">{links.map(([href,label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav><a class="header-cta" href="/contact">Free estimate <span aria-hidden="true">↗</span></a></header>
+<header class="site-header"><a class="wordmark" href="/" aria-label="Dream Solutions Tennessee home">Dream Solutions<span>Tennessee</span></a><nav aria-label="Main navigation">{links.map(([href,label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav><a class="header-cta" href="/contact">Free estimate <span aria-hidden="true">↗</span></a></header>
