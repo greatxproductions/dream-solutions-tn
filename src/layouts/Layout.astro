@@ -178,6 +178,17 @@ if (h1 && !reduce) {
   });
 }
 
+// 2b. Contact shield — slow organic spin (wandering speed, never reverses, never fast)
+const pshield = document.querySelector('.phone-shield');
+if (pshield && !reduce) {
+  let ang = 0, vel = 15, seed = Math.random() * 1000;
+  gsap.ticker.add((time, dt) => {
+    vel = 15 + 8 * Math.sin(seed + time * 0.2) + 4 * Math.sin(seed * 1.3 + time * 0.09);
+    ang = (ang + (vel * dt) / 1000) % 360;
+    pshield.style.transform = 'rotate(' + ang + 'deg)';
+  });
+}
+
 // 3. Liquid mesh gradient background (WebGL) — creative layer; falls back to CSS aurora
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

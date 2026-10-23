@@ -496,7 +496,20 @@ main {
   font-family: var(--display);
   font-size: 32px;
   display: block;
+}
+.phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 38px;
+}
+.phone-shield {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 18px rgba(0,229,255,.45));
+  will-change: transform;
 }
 
 .contact-details>p:last-child {
