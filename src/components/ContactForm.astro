@@ -18,15 +18,15 @@ if (form) {
       const data = await res.json();
       if (data.ok) {
         note.innerHTML = 'Thanks — we got your request and will be in touch within one business day.';
-        note.style.color = '#0e7c86';
+        note.style.color = '#00E5FF';
         form.reset();
       } else {
         note.innerHTML = (data.error || 'Something went wrong.') + ' Please call <a href="tel:+16155550123">(615) 555-0123</a>.';
-        note.style.color = '#e56b4f';
+        note.style.color = '#ff6b6b';
       }
     } catch {
       note.innerHTML = 'Could not send. Please call <a href="tel:+16155550123">(615) 555-0123</a>.';
-      note.style.color = '#e56b4f';
+      note.style.color = '#ff6b6b';
     } finally {
       btn.disabled = false;
       btn.innerHTML = original;
