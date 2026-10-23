@@ -60,7 +60,7 @@
 .site-header {
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  background: rgba(10,10,10,0.82) !important;
+  background: rgba(12,18,25,0.82) !important;
 }
 
 /* ---- 3. Scroll-reveal ---- */

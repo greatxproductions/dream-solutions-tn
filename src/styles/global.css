@@ -8,7 +8,7 @@
 /* Theme tokens */
 :root {
   color-scheme: dark;
-  --bg: #0a0a0a;
+  --bg: #0c1219;
   --fg: #eaf3f5;
   --muted: #8fa3b3;
   --line: #00e5ff26;
@@ -27,7 +27,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(140% 100% at 50% -12%, rgba(0,150,255,0.13), rgba(0,229,255,0.04) 55%, transparent 78%),
+    var(--bg);
   color: var(--fg);
   font-family: var(--sans);
   font-size: 16px;
@@ -115,7 +117,7 @@ main {
   justify-content: space-between;
   gap: 32px;
   min-height: 112px;
-  background: #0a0a0af2;
+  background: #0c1219f2;
   border-bottom: 1px solid var(--line);
 }
 
