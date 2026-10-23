@@ -17,30 +17,41 @@
   content: '';
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.55;
+  filter: blur(80px);
+  opacity: 0.6;
 }
 .bg-aurora::before {
-  width: 56vw; height: 56vw;
-  top: -18vw; left: -12vw;
-  background: radial-gradient(circle, rgba(0,229,255,0.14), transparent 70%);
-  animation: aurora-a 24s ease-in-out infinite alternate;
+  width: 62vw; height: 62vw;
+  top: -20vw; left: -14vw;
+  background: radial-gradient(circle at 32% 32%, rgba(0,229,255,0.20), rgba(0,150,255,0.10) 48%, transparent 72%);
+  animation: aurora-a 26s ease-in-out infinite alternate;
 }
 .bg-aurora::after {
-  width: 50vw; height: 50vw;
-  bottom: -14vw; right: -10vw;
-  background: radial-gradient(circle, rgba(200,211,221,0.10), transparent 70%);
-  animation: aurora-b 28s ease-in-out infinite alternate;
+  width: 56vw; height: 56vw;
+  bottom: -18vw; right: -12vw;
+  background: radial-gradient(circle at 62% 38%, rgba(143,163,179,0.16), rgba(200,211,221,0.07) 50%, transparent 74%);
+  animation: aurora-b 34s ease-in-out infinite alternate;
 }
 .bg-aurora .aurora-c {
-  width: 44vw; height: 44vw;
-  top: 38%; left: 42%;
-  background: radial-gradient(circle, rgba(110,197,232,0.12), transparent 70%);
-  animation: aurora-c 32s ease-in-out infinite alternate;
+  width: 52vw; height: 52vw;
+  top: 32%; left: 40%;
+  background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.16), rgba(110,197,232,0.09) 50%, transparent 74%);
+  animation: aurora-c 40s ease-in-out infinite alternate;
 }
-@keyframes aurora-a { to { transform: translate(14vw, 10vh) scale(1.18); } }
-@keyframes aurora-b { to { transform: translate(-12vw, -8vh) scale(1.22); } }
-@keyframes aurora-c { to { transform: translate(-16vw, 12vh) scale(0.88); } }
+@keyframes aurora-a { to { transform: translate(16vw, 12vh) scale(1.22) rotate(25deg); } }
+@keyframes aurora-b { to { transform: translate(-14vw, -10vh) scale(1.26) rotate(-22deg); } }
+@keyframes aurora-c { to { transform: translate(-18vw, 14vh) scale(0.86) rotate(30deg); } }
+
+/* ---- 1b. Liquid mesh gradient (WebGL) — replaces the CSS aurora when supported ---- */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+body.has-mesh .bg-aurora { display: none; }
 
 /* ---- Faint tech grid overlay ---- */
 .bg-grid {
