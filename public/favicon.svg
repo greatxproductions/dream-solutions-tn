@@ -8,16 +8,32 @@
       <stop offset="1" stop-color="#a9b6c2"/>
     </linearGradient>
     <linearGradient id="navy" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#11151c"/>
-      <stop offset="1" stop-color="#0b0d12"/>
+      <stop offset="0" stop-color="#14181f"/>
+      <stop offset="1" stop-color="#0a0c10"/>
     </linearGradient>
   </defs>
-  <rect x="8" y="8" width="224" height="224" rx="46" fill="url(#navy)" stroke="url(#chrome)" stroke-width="5"/>
-  <g fill="none" stroke="url(#chrome)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 72 88 V 152 M 72 88 H 96 A 32 32 0 0 1 96 152 H 72"/>
-  </g>
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 140 88 A 16 16 0 0 0 140 120 A 16 16 0 0 1 140 152" stroke="#0b0d12" stroke-width="22"/>
-    <path d="M 140 88 A 16 16 0 0 0 140 120 A 16 16 0 0 1 140 152" stroke="url(#chrome)" stroke-width="18"/>
+
+  <!-- black field -->
+  <circle cx="120" cy="120" r="104" fill="#08090c"/>
+  <!-- metallic outer ring -->
+  <circle cx="120" cy="120" r="104" fill="none" stroke="url(#chrome)" stroke-width="12"/>
+  <!-- cyan inner ring -->
+  <circle cx="120" cy="120" r="85" fill="none" stroke="#00E5FF" stroke-width="2.5" opacity="0.85"/>
+
+  <!-- shield -->
+  <g transform="translate(60,43.5) scale(0.5)">
+    <path d="M 60 20 L 180 20 L 200 44 L 200 180 L 120 286 L 40 180 L 40 44 Z"
+          fill="url(#navy)" stroke="url(#chrome)" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M 70 30 L 170 30 L 190 54 L 190 176 L 120 276 L 50 176 L 50 54 Z"
+          fill="none" stroke="#00E5FF" stroke-width="2.5" opacity="0.7"/>
+    <path d="M 73 33 L 167 33 L 185 56 L 185 173 L 120 270 L 55 173 L 55 56 Z"
+          fill="none" stroke="url(#chrome)" stroke-width="3.5" opacity="0.85"/>
+    <g fill="none" stroke="url(#chrome)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 70 78 V 144 M 70 78 H 94 A 34 34 0 0 1 94 144 H 70"/>
+    </g>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 136 82 A 16 16 0 0 0 136 114 A 16 16 0 0 1 136 146" stroke="#0b0d12" stroke-width="20"/>
+      <path d="M 136 82 A 16 16 0 0 0 136 114 A 16 16 0 0 1 136 146" stroke="url(#chrome)" stroke-width="16"/>
+    </g>
   </g>
 </svg>
