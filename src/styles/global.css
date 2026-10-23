@@ -485,6 +485,10 @@ main {
 }
 
 .contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
   margin-top: 65px;
 }
 
@@ -496,22 +500,21 @@ main {
   font-family: var(--display);
   font-size: 32px;
   display: block;
+  margin-bottom: 34px;
 }
-.phone-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 18px;
-  margin-bottom: 38px;
+.contact-info {
+  flex: 1 1 240px;
+  min-width: 0;
 }
 .phone-shield-wrap {
   position: relative;
   display: inline-block;
   perspective: 700px;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 .phone-shield {
-  width: clamp(80px, 22vw, 124px);
+  width: clamp(150px, 26vw, 240px);
   height: auto;
   display: block;
   filter: drop-shadow(0 14px 18px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(0,229,255,.42));
@@ -537,7 +540,7 @@ main {
   100% { opacity: 0; transform: translate3d(var(--dx, 0), -96px, var(--dz, 0)) scale(1.9); }
 }
 
-.contact-details>p:last-child {
+.contact-info > p:last-child {
   font-size: 14px;
   color: var(--muted);
 }
@@ -820,6 +823,9 @@ form .button {
   }
   .contact-details .phone-link {
     font-size: 26px;
+  }
+  .phone-shield {
+    width: 170px;
   }
   .form-grid {
     gap: 28px 20px;
