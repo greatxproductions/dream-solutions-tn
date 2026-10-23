@@ -4,6 +4,13 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# Source env; wrangler needs CLOUDFLARE_API_TOKEN to be the Pages/Workers token
+# (CLOUDFLARE_PAGES_TOKEN), NOT the DNS-edit token (CLOUDFLARE_API_TOKEN).
+if [ -f "$HOME/.hermes/.env" ]; then
+  set -a; . "$HOME/.hermes/.env"; set +a
+fi
+export CLOUDFLARE_API_TOKEN="${CLOUDFLARE_PAGES_TOKEN:-$CLOUDFLARE_API_TOKEN}"
+
 echo "=== build ==="
 npm run build
 
