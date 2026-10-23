@@ -1,39 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 348" width="240" height="348">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 290" width="240" height="290">
   <defs>
-    <linearGradient id="cyanglow" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#00E5FF"/>
-      <stop offset="1" stop-color="#2BE6D7"/>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.3" stop-color="#c8d3dd"/>
+      <stop offset="0.55" stop-color="#8fa3b3"/>
+      <stop offset="0.8" stop-color="#d8e1e8"/>
+      <stop offset="1" stop-color="#a9b6c2"/>
     </linearGradient>
-    <linearGradient id="shieldbg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0F3D4A"/>
-      <stop offset="1" stop-color="#0A1A20"/>
+    <linearGradient id="navy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#11151c"/>
+      <stop offset="1" stop-color="#0b0d12"/>
     </linearGradient>
   </defs>
 
-  <!-- ocean waves (clearance from canvas edge) -->
-  <g fill="none" stroke="url(#cyanglow)" stroke-width="3" stroke-linecap="round">
-    <path d="M 40 294 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.9"/>
-    <path d="M 46 306 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.62"/>
-    <path d="M 52 318 q 20 -11 40 0 q 20 11 40 0 q 20 -11 40 0 q 20 11 40 0" opacity="0.38"/>
-  </g>
-
-  <!-- outer shield -->
+  <!-- outer shield: navy field + chrome rim -->
   <path d="M 60 20 L 180 20 L 200 44 L 200 180 L 120 286 L 40 180 L 40 44 Z"
-        fill="url(#shieldbg)" stroke="url(#cyanglow)" stroke-width="5" stroke-linejoin="round"/>
+        fill="url(#navy)" stroke="url(#chrome)" stroke-width="7" stroke-linejoin="round"/>
 
-  <!-- inner shield outline -->
-  <path d="M 74 34 L 166 34 L 186 58 L 186 166 L 120 272 L 54 166 L 54 58 Z"
-        fill="none" stroke="url(#cyanglow)" stroke-width="2" opacity="0.55"/>
+  <!-- inner bevel -->
+  <path d="M 73 33 L 167 33 L 185 56 L 185 173 L 120 270 L 55 173 L 55 56 Z"
+        fill="none" stroke="url(#chrome)" stroke-width="3.5" opacity="0.85"/>
 
-  <!-- DS monogram -->
-  <g fill="none" stroke="url(#cyanglow)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 70 76 V 144 M 70 76 H 94 A 34 34 0 0 1 94 144 H 70"/>
-    <path d="M 154 80 A 16 16 0 0 0 154 112 A 16 16 0 0 1 154 144"/>
+  <!-- D (behind) -->
+  <g fill="none" stroke="url(#chrome)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 70 78 V 144 M 70 78 H 94 A 34 34 0 0 1 94 144 H 70"/>
   </g>
 
-  <!-- Rn (radon) — R taller than n -->
-  <g fill="none" stroke="url(#cyanglow)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 96 186 V 214 M 96 186 H 106 A 14 14 0 0 1 106 214 H 96 M 114 198 L 128 214"/>
-    <path d="M 132 196 V 214 M 132 196 A 6 6 0 0 1 144 196 V 214"/>
+  <!-- S (in front, with navy halo for the interlock separation) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 136 82 A 16 16 0 0 0 136 114 A 16 16 0 0 1 136 146" stroke="#0b0d12" stroke-width="20"/>
+    <path d="M 136 82 A 16 16 0 0 0 136 114 A 16 16 0 0 1 136 146" stroke="url(#chrome)" stroke-width="16"/>
   </g>
 </svg>
