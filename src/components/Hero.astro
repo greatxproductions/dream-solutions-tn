@@ -1,4 +1,98 @@
 ---
 const { eyebrow, title, description, home = false } = Astro.props;
 ---
-<section class:list={['hero', { 'home-hero': home }]}><div class="hero-copy"><p class="eyebrow">{eyebrow}</p><h1 set:html={title} /><p class="hero-description">{description}</p><a class="button" href="/contact">Get a Free Estimate <span aria-hidden="true">↗</span></a></div>{home && <div class="house-art"><div class="float-shape" style="width:150px;height:150px;top:5%;left:6%;background:radial-gradient(circle,rgba(0,229,255,0.18),transparent 70%)" aria-hidden="true"></div><div class="float-shape" style="width:95px;height:95px;top:26%;right:2%;background:radial-gradient(circle,rgba(200,211,221,0.24),transparent 70%);animation-delay:-5s" aria-hidden="true"></div><div class="float-shape" style="width:65px;height:65px;bottom:20%;left:18%;background:radial-gradient(circle,rgba(110,197,232,0.2),transparent 70%);animation-delay:-9s" aria-hidden="true"></div><img src="/brand/shield-emblem.png" width="1254" height="1254" alt="Dream Solutions Tennessee — DS shield emblem" fetchpriority="high" /><p class="art-caption"><span>Built around your home.</span><span>Focused on the air within.</span></p></div>}</section>
+<section class:list={['hero', { 'home-hero': home }]}>
+  <div class="hero-copy">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 set:html={title} />
+    <p class="hero-description">{description}</p>
+    <a class="button" href="/contact">Get a Free Estimate <span aria-hidden="true">↗</span></a>
+  </div>
+  {home && (
+    <div class="house-art">
+      <div class="house-scene" aria-label="Animated preview of a modern home with clean air flowing up and out">
+        <div class="hs-rays" aria-hidden="true"></div>
+        <svg class="hs-house" viewBox="0 0 600 560" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="hs-chrome" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset=".28" stop-color="#c8d3dd"/>
+              <stop offset=".5" stop-color="#8fa3b3"/>
+              <stop offset=".72" stop-color="#d8e1e8"/>
+              <stop offset="1" stop-color="#a9b6c2"/>
+            </linearGradient>
+            <linearGradient id="hs-glass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0f4d5e"/>
+              <stop offset=".55" stop-color="#0b3947"/>
+              <stop offset="1" stop-color="#06222b"/>
+            </linearGradient>
+            <radialGradient id="hs-warm" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#8fe0ee" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#8fe0ee" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hs-glow" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#00E5FF" stop-opacity=".32"/>
+              <stop offset="1" stop-color="#00E5FF" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hs-rim" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#00E5FF" stop-opacity=".75"/>
+              <stop offset="1" stop-color="#00E5FF" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- ground + glow pool -->
+          <line x1="70" y1="470" x2="530" y2="470" stroke="url(#hs-chrome)" stroke-width="1.5"/>
+          <ellipse cx="300" cy="472" rx="258" ry="26" fill="url(#hs-glow)"/>
+
+          <!-- cantilevered roof slab -->
+          <rect x="110" y="244" width="380" height="22" rx="3" fill="url(#hs-chrome)"/>
+          <rect x="110" y="244" width="380" height="3" fill="#ffffff" opacity=".85"/>
+
+          <!-- house body -->
+          <rect x="150" y="266" width="300" height="204" fill="#0b0f14"/>
+
+          <!-- glass wall -->
+          <rect x="158" y="274" width="284" height="188" fill="url(#hs-glass)"/>
+
+          <!-- lit rooms within -->
+          <circle cx="235" cy="330" r="46" fill="url(#hs-warm)"/>
+          <circle cx="365" cy="330" r="46" fill="url(#hs-warm)"/>
+
+          <!-- mullions + frame -->
+          <line x1="158" y1="274" x2="158" y2="462" stroke="url(#hs-chrome)" stroke-width="2"/>
+          <line x1="442" y1="274" x2="442" y2="462" stroke="url(#hs-chrome)" stroke-width="2"/>
+          <line x1="300" y1="274" x2="300" y2="462" stroke="url(#hs-chrome)" stroke-width="2" opacity=".6"/>
+          <line x1="150" y1="274" x2="450" y2="274" stroke="url(#hs-chrome)" stroke-width="2"/>
+
+          <!-- cyan rim light on the roof edge -->
+          <rect x="150" y="266" width="300" height="4" fill="url(#hs-rim)"/>
+
+          <!-- clean-air exhaust vent -->
+          <rect x="282" y="226" width="36" height="18" rx="4" fill="url(#hs-chrome)"/>
+          <rect x="288" y="231" width="24" height="3" fill="#00E5FF" opacity=".85"/>
+
+          <!-- base plinth -->
+          <rect x="144" y="462" width="312" height="8" fill="url(#hs-chrome)"/>
+        </svg>
+        <div class="hs-glint" aria-hidden="true"></div>
+        <div class="hs-air" aria-hidden="true">
+          <span class="air-p" style="left:44%;top:40%;animation-delay:0s"></span>
+          <span class="air-p air-p--lg" style="left:50%;top:38%;animation-delay:-.9s"></span>
+          <span class="air-p" style="left:56%;top:41%;animation-delay:-1.7s"></span>
+          <span class="air-p air-p--lg" style="left:41%;top:43%;animation-delay:-2.5s"></span>
+          <span class="air-p" style="left:59%;top:37%;animation-delay:-3.2s"></span>
+          <span class="air-p" style="left:47%;top:36%;animation-delay:-4s"></span>
+          <span class="air-p air-p--lg" style="left:53%;top:42%;animation-delay:-.5s"></span>
+          <span class="air-p" style="left:38%;top:39%;animation-delay:-1.3s"></span>
+          <span class="air-p" style="left:62%;top:40%;animation-delay:-2.1s"></span>
+          <span class="air-p" style="left:45%;top:44%;animation-delay:-2.9s"></span>
+          <span class="air-p" style="left:51%;top:35%;animation-delay:-3.7s"></span>
+          <span class="air-p" style="left:57%;top:43%;animation-delay:-4.5s"></span>
+        </div>
+        <img class="hs-shield" src="/brand/shield-emblem.png" width="1254" height="1254" alt="" aria-hidden="true" loading="lazy" />
+        <div class="hs-ground" aria-hidden="true"></div>
+      </div>
+      <p class="art-caption"><span>Built around your home.</span><span>Focused on the air within.</span></p>
+    </div>
+  )}
+</section>

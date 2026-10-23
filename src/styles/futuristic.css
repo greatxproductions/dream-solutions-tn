@@ -96,20 +96,8 @@
   box-shadow: 0 26px 55px -26px rgba(0,229,255,0.42);
 }
 
-/* ---- 5. Animated gradient text on headline emphasis ---- */
-h1 em, h2 em {
-  background: linear-gradient(100deg, #eaf3f5, #8fa3b3 52%, #00E5FF);
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: shimmer 9s ease-in-out infinite;
-}
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
+/* ---- 5. Accent emphasis (solid cyan; gradient-clip removed — it breaks under GSAP SplitText transforms) ---- */
+/* h1/h2 em inherit `em { color: #00E5FF }` from global.css */
 
 /* ---- 6. Popping buttons ---- */
 .button {

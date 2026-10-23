@@ -1,0 +1,261 @@
+/* =====================================================================
+   Dream Solutions TN — "posh luxury" motion layer
+   Loaded AFTER futuristic.css. Animated house scene + refined interactions.
+   All motion is disabled under prefers-reduced-motion.
+   ===================================================================== */
+
+/* ============================ House scene ============================ */
+.house-scene {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+/* God rays behind the house */
+.house-scene .hs-rays {
+  position: absolute;
+  inset: -22% -10% -8%;
+  z-index: 0;
+  background:
+    radial-gradient(48% 40% at 50% 28%, rgba(0,229,255,.16), transparent 70%),
+    conic-gradient(from 0deg at 50% 30%,
+      transparent 0deg 6deg, rgba(0,229,255,.055) 8deg, transparent 12deg 22deg,
+      rgba(0,229,255,.045) 24deg, transparent 30deg 42deg, rgba(0,229,255,.05) 44deg,
+      transparent 50deg 58deg, rgba(0,229,255,.04) 60deg, transparent 66deg);
+  filter: blur(5px);
+  animation: rays-drift 30s linear infinite;
+  pointer-events: none;
+}
+@keyframes rays-drift { to { transform: rotate(360deg); } }
+
+/* The house itself — gentle float */
+.house-scene .hs-house {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 34px 60px rgba(0,0,0,.5));
+  animation: house-float 9s ease-in-out infinite;
+}
+@keyframes house-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-11px) rotate(-.4deg); }
+}
+
+/* Specular glint sweeping across the chrome roof */
+.house-scene .hs-glint {
+  position: absolute;
+  top: 43%;
+  left: 16%;
+  width: 15%;
+  height: 4%;
+  z-index: 2;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.7), transparent);
+  filter: blur(1px);
+  transform: skewX(-18deg);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: glint-sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glint-sweep {
+  0%, 58%   { left: 16%; opacity: 0; }
+  66%       { opacity: .85; }
+  82%, 100% { left: 68%; opacity: 0; }
+}
+
+/* Rising clean-air particles */
+.house-scene .hs-air {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.house-scene .air-p {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00E5FF;
+  box-shadow: 0 0 7px rgba(0,229,255,.85);
+  opacity: 0;
+  animation: air-rise 5s ease-in-out infinite;
+}
+.house-scene .air-p--lg {
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 11px rgba(0,229,255,.95);
+}
+@keyframes air-rise {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.5); }
+  15%  { opacity: .9; }
+  50%  { transform: translate(7px, -40px) scale(.9); }
+  65%  { opacity: .32; }
+  100% { opacity: 0; transform: translate(-5px, -80px) scale(1.25); }
+}
+
+/* Shield badge floating in front of the house */
+.house-scene .hs-shield {
+  position: absolute;
+  z-index: 3;
+  right: 1%;
+  bottom: 5%;
+  width: clamp(84px, 17%, 150px);
+  height: auto;
+  animation: shield-hover 7s ease-in-out infinite,
+             shield-breathe 4.5s ease-in-out infinite;
+}
+@keyframes shield-hover {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-14px) rotate(-2deg); }
+}
+@keyframes shield-breathe {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(0,229,255,.32)); }
+  50%      { filter: drop-shadow(0 0 34px rgba(0,229,255,.7)); }
+}
+
+/* Ground glow pool */
+.house-scene .hs-ground {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -3%;
+  height: 34%;
+  z-index: 0;
+  background: radial-gradient(50% 62% at 50% 100%, rgba(0,229,255,.22), transparent 70%);
+  filter: blur(10px);
+  animation: ground-pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes ground-pulse { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+
+/* Perspective for the scroll/cursor 3D parallax */
+.house-art { perspective: 1200px; }
+
+/* ==================== Hero entrance choreography ==================== */
+.hero-copy .eyebrow,
+.hero-copy .hero-description,
+.hero-copy .button {
+  opacity: 0;
+  animation: hero-in .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-copy .eyebrow         { animation-delay: .05s; }
+.hero-copy .hero-description{ animation-delay: .30s; }
+.hero-copy .button          { animation-delay: .44s; }
+/* h1 is animated by GSAP SplitText (kinetic type) — hidden until JS, visible if JS off */
+html.js .home-hero h1       { opacity: 0; }
+.hero-copy h1               { opacity: 1; }
+.home-hero .house-art {
+  opacity: 0;
+  animation: hero-in 1.15s cubic-bezier(.16,1,.3,1) .3s forwards;
+}
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==================== Refined reveals (blur + rise) ==================== */
+.js .reveal {
+  transition:
+    opacity .8s cubic-bezier(.16,1,.3,1),
+    transform .8s cubic-bezier(.16,1,.3,1),
+    filter .8s ease;
+  filter: blur(10px);
+}
+.js .reveal.is-visible { filter: blur(0); }
+
+/* ==================== Stat glow pulse ==================== */
+.stat strong { transition: text-shadow .5s ease; }
+.stat strong.is-pulse { text-shadow: 0 0 28px rgba(0,229,255,.8); }
+
+/* ==================== Header shield breathing ==================== */
+.brand-emblem { animation: emblem-breathe 5s ease-in-out infinite; }
+@keyframes emblem-breathe {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(0,229,255,.22)); }
+  50%      { filter: drop-shadow(0 0 10px rgba(0,229,255,.55)); }
+}
+
+/* ==================== Magnetic tilt ==================== */
+[data-tilt] { will-change: transform; }
+
+/* ==================== Button shine sweep ==================== */
+.button { position: relative; overflow: hidden; }
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-20deg);
+  transition: left .65s ease;
+  pointer-events: none;
+}
+.button:hover::after { left: 130%; }
+
+/* ==================== Nav underline sweep ==================== */
+.site-header nav a { position: relative; }
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 1px;
+  background: #00E5FF;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .32s cubic-bezier(.16,1,.3,1);
+}
+.site-header nav a:hover::after,
+.site-header nav a[aria-current]::after { transform: scaleX(1); }
+
+/* ==================== Film grain ==================== */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==================== Scroll progress ==================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 40;
+  pointer-events: none;
+}
+.scroll-progress__bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #00E5FF, #8fa3b3);
+  box-shadow: 0 0 8px rgba(0,229,255,.6);
+}
+
+/* ==================== Kinetic typography (GSAP SplitText) ==================== */
+html.js { scroll-behavior: auto; } /* Lenis owns smooth scroll */
+.home-hero h1 { perspective: 800px; }
+.hero-copy h1 .kt-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+/* ==================== Reduced motion ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > *, .home-hero .house-art { opacity: 1 !important; animation: none !important; }
+  .house-scene .hs-house, .house-scene .hs-shield, .house-scene .hs-rays,
+  .house-scene .hs-ground, .house-scene .hs-glint, .house-scene .air-p,
+  .brand-emblem { animation: none !important; }
+  .house-scene .air-p { opacity: .6 !important; }
+  .house-scene .hs-glint { opacity: 0 !important; }
+  .js .reveal { filter: none !important; }
+  [data-tilt] { transform: none !important; transition: none !important; }
+}

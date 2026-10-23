@@ -1,12 +1,13 @@
 ---
 import '../styles/global.css';
 import '../styles/futuristic.css';
+import '../styles/luxury.css';
 import SeoHead from '../components/SeoHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 const { title, description } = Astro.props;
 ---
-<!doctype html><html lang="en"><head><script is:inline>document.documentElement.classList.add("js");</script><SeoHead title={title} description={description} /><slot name="head" /></head><body id="top"><div class="bg-aurora" aria-hidden="true"><div class="aurora-c"></div></div><div class="bg-grid" aria-hidden="true"></div><Header /><main id="main"><slot /></main><Footer /><script>
+<!doctype html><html lang="en"><head><script is:inline>document.documentElement.classList.add("js");</script><SeoHead title={title} description={description} /><slot name="head" /></head><body id="top"><div class="bg-aurora" aria-hidden="true"><div class="aurora-c"></div></div><div class="bg-grid" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><Header /><main id="main"><slot /></main><Footer /><script>
 (function () {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasIO = 'IntersectionObserver' in window;
@@ -68,4 +69,112 @@ const { title, description } = Astro.props;
     });
   }
 })();
+</script><script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Scroll progress bar
+  var prog = document.createElement('div');
+  prog.className = 'scroll-progress';
+  prog.setAttribute('aria-hidden', 'true');
+  prog.innerHTML = '<div class="scroll-progress__bar"></div>';
+  document.body.appendChild(prog);
+  var bar = prog.firstChild;
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (!matchMedia('(pointer: fine)').matches) return;
+
+  // House scene follows cursor + scroll (composed parallax)
+  var scene = document.querySelector('.house-scene');
+  if (scene) {
+    var cx = 0, cy = 0, sp = 0;
+    var hero = document.querySelector('.home-hero');
+    function applyScene() {
+      scene.style.transform =
+        'translate(' + (cx * 10) + 'px,' + (cy * 10 + sp * 46) + 'px) rotateX(' + (sp * 3) + 'deg)';
+    }
+    scene.addEventListener('pointermove', function (e) {
+      var r = scene.getBoundingClientRect();
+      cx = (e.clientX - r.left) / r.width - 0.5;
+      cy = (e.clientY - r.top) / r.height - 0.5;
+      applyScene();
+    });
+    scene.addEventListener('pointerleave', function () { cx = 0; cy = 0; applyScene(); });
+    if (hero) {
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY, h = hero.offsetHeight;
+        sp = y < h ? y / h : 1;
+        applyScene();
+      }, { passive: true });
+    }
+  }
+
+  // Magnetic tilt on service cards
+  document.querySelectorAll('.service-card').forEach(function (el) {
+    el.setAttribute('data-tilt', '5');
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = 'perspective(700px) rotateY(' + (px * 6) + 'deg) rotateX(' + (-py * 6) + 'deg) translateY(-5px)';
+    });
+    el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+  });
+
+  // Stat glow pulse when the number lands
+  var statIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var t = e.target;
+        t.classList.add('is-pulse');
+        setTimeout(function () { t.classList.remove('is-pulse'); }, 900);
+        statIO.unobserve(t);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat strong').forEach(function (s) { statIO.observe(s); });
+})();
+</script><script>
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import Lenis from 'lenis';
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// 1. Lenis smooth scroll — the "scroll-motion" momentum feel
+let lenis;
+if (!reduce) {
+  lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (href && href.length > 1) {
+        const el = document.querySelector(href);
+        if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -130, duration: 1.4 }); }
+      }
+    });
+  });
+}
+
+// 2. Kinetic typography — headline words rise in with stagger + blur
+const h1 = document.querySelector('.home-hero h1');
+if (h1 && !reduce) {
+  gsap.set(h1, { opacity: 1 });
+  const split = new SplitText(h1, { type: 'words', wordsClass: 'kt-word' });
+  gsap.from(split.words, {
+    opacity: 0, y: '0.85em', rotateX: -45, filter: 'blur(6px)',
+    stagger: 0.055, duration: 1.05, ease: 'power4.out', delay: 0.1
+  });
+}
 </script></body></html>
