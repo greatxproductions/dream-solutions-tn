@@ -7,7 +7,46 @@ function escapeHtml(s: string) {
 }
 
 const json = (body: unknown, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
+  new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+    },
+  });
+
+const LIMITS = { name: 120, email: 254, phone: 40, service: 100, message: 5000 };
+const RATE_WINDOW_SEC = 3600; // 1 hour
+const RATE_MAX = 10; // submissions per IP per window
+
+// Fixed-window rate limiter backed by the SESSION KV namespace. Fail-open:
+// if KV is unavailable the form still works (honeypot still blocks bots).
+async function isRateLimited(env: any, ip: string): Promise<boolean> {
+  try {
+    const kv = env?.SESSION;
+    if (!kv || typeof kv.get !== 'function' || typeof kv.put !== 'function') return false;
+    const key = `rl:contact:${ip}`;
+    const now = Math.floor(Date.now() / 1000);
+    let arr: number[] = [];
+    const raw = await kv.get(key);
+    if (raw) {
+      try {
+        arr = JSON.parse(raw);
+      } catch {
+        arr = [];
+      }
+    }
+    arr = arr.filter((t) => now - t < RATE_WINDOW_SEC);
+    if (arr.length >= RATE_MAX) return true;
+    arr.push(now);
+    await kv.put(key, JSON.stringify(arr), { expirationTtl: RATE_WINDOW_SEC });
+    return false;
+  } catch {
+    return false;
+  }
+}
 
 export const GET: APIRoute = () => json({ ok: true });
 
@@ -25,6 +64,11 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: false, error: 'Invalid request.' }, 400);
   }
 
+  // Honeypot: hidden field that real users never fill. Drop bots silently.
+  if ((data.company || data.website || '').trim() !== '') {
+    return json({ ok: true, id: 'accepted' });
+  }
+
   const name = (data.name || '').trim();
   const email = (data.email || '').trim();
   const phone = (data.phone || '').trim();
@@ -37,10 +81,24 @@ export const POST: APIRoute = async ({ request }) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ ok: false, error: 'Please enter a valid email address.' }, 400);
   }
+  if (
+    name.length > LIMITS.name ||
+    email.length > LIMITS.email ||
+    phone.length > LIMITS.phone ||
+    service.length > LIMITS.service ||
+    message.length > LIMITS.message
+  ) {
+    return json({ ok: false, error: 'One or more fields are too long.' }, 400);
+  }
 
+  const ip =
+    request.headers.get('CF-Connecting-IP') || request.headers.get('x-forwarded-for') || 'unknown';
   // Env vars live in the Workers runtime — locals.runtime.env was removed in Astro v6.
   const { env } = await import('cloudflare:workers');
   const e = env as any;
+  if (await isRateLimited(e, ip)) {
+    return json({ ok: false, error: 'Too many requests. Please try again later.' }, 429);
+  }
   const RESEND_API_KEY: string = e.RESEND_API_KEY || '';
   const FROM: string = e.LEAD_FROM_EMAIL || 'Dream Solutions TN <leads@dreamsolutionstn.com>';
   const TO: string[] = (e.LEAD_TO_EMAILS || '')
