@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="logo-title logo-description">
+  <title id="logo-title">Dream Solutions Radon</title>
+  <desc id="logo-description">A black circular badge with a chrome rim, cyan inner ring, silver and cyan DS heater shield, and the words Dream Solutions, Radon, Prescribing Clean Air for Your Home.</desc>
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.22" stop-color="#c8d3dd"/>
+      <stop offset="0.46" stop-color="#8fa3b3"/>
+      <stop offset="0.7" stop-color="#d8e1e8"/>
+      <stop offset="1" stop-color="#a9b6c2"/>
+    </linearGradient>
+    <radialGradient id="rim" gradientUnits="userSpaceOnUse" cx="200" cy="200" r="191">
+      <stop offset="0.84" stop-color="#8fa3b3"/>
+      <stop offset="0.855" stop-color="#ffffff"/>
+      <stop offset="0.88" stop-color="#c8d3dd"/>
+      <stop offset="0.925" stop-color="#8fa3b3"/>
+      <stop offset="0.97" stop-color="#d8e1e8"/>
+      <stop offset="1" stop-color="#a9b6c2"/>
+    </radialGradient>
+    <linearGradient id="shield-field" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#131720"/>
+      <stop offset="1" stop-color="#0a0c10"/>
+    </linearGradient>
+    <filter id="cyan-glow" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <path id="letter-d" d="M151 104 V174 M141 174 H162 M151 104 H158 C181 104 193 119 193 139 C193 160 180 174 158 174 H151"/>
+    <path id="letter-s" d="M248 112 C238 101 216 100 207 112 C196 128 211 136 226 140 C244 145 250 155 240 167 C231 179 211 179 200 168"/>
+  </defs>
+
+  <circle cx="200" cy="200" r="176" fill="#0a0a0a"/>
+  <circle cx="200" cy="200" r="176" fill="none" stroke="url(#rim)" stroke-width="30"/>
+  <circle cx="200" cy="200" r="140" fill="none" stroke="#00E5FF" stroke-width="1.5" filter="url(#cyan-glow)"/>
+
+  <path d="M139 78 H261 C268 100 266 127 254 150 C241 175 220 191 200 201 C180 191 159 175 146 150 C134 127 132 100 139 78 Z"
+        fill="url(#shield-field)" stroke="url(#chrome)" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M144 84 H256 C261 104 259 126 248 147 C236 169 218 184 200 194 C182 184 164 169 152 147 C141 126 139 104 144 84 Z"
+        fill="none" stroke="#00E5FF" stroke-width="2" stroke-linejoin="round"/>
+
+  <g fill="none" stroke-linecap="butt" stroke-linejoin="miter">
+    <use href="#letter-d" stroke="#00E5FF" stroke-width="18"/>
+    <use href="#letter-d" stroke="url(#chrome)" stroke-width="13"/>
+    <use href="#letter-s" stroke="#00E5FF" stroke-width="18"/>
+    <use href="#letter-s" stroke="url(#chrome)" stroke-width="13"/>
+  </g>
+
+  <g font-family="Montserrat, 'Century Gothic', Futura, Avenir, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="200" y="246" fill="#6ec5e8" font-size="20" font-weight="600" letter-spacing="3" textLength="286" lengthAdjust="spacingAndGlyphs">DREAM SOLUTIONS</text>
+    <text x="200" y="290" fill="#006a7a" font-size="32" font-weight="700" letter-spacing="18" textLength="228" lengthAdjust="spacingAndGlyphs">RADON</text>
+    <text x="200" y="318" fill="#ffffff" font-size="9.5" font-weight="400" letter-spacing="1.5" textLength="250" lengthAdjust="spacingAndGlyphs">PRESCRIBING CLEAN AIR FOR YOUR HOME</text>
+  </g>
+</svg>

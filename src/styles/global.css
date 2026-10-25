@@ -336,6 +336,48 @@ main {
   color: #00E5FF;
 }
 
+.monitoring-section {
+  padding-block: 100px;
+  border-top: 1px solid var(--line);
+}
+
+.monitor-note {
+  max-width: 340px;
+  font-size: 14px;
+  color: var(--muted);
+  align-self: end;
+  padding-bottom: 6px;
+}
+
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+.monitor-badge {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 7px 13px;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #00E5FF;
+  background: rgba(0, 229, 255, 0.06);
+}
+
+@media (max-width: 1000px) {
+  .monitor-grid { gap: 25px; }
+}
+
+@media (max-width: 760px) {
+  .monitoring-section { padding-block: 65px; }
+  .monitor-grid { grid-template-columns: 1fr; gap: 35px; }
+  .monitor-note { max-width: none; text-align: left; align-self: auto; padding-bottom: 0; margin-top: 16px; }
+  .monitor-card p, .monitor-card h3 { min-height: 0; }
+}
+
 .area-section {
   border-top: 1px solid var(--line);
 }
